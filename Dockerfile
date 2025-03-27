@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM image-registry.openshift-image-registry.svc:5000/openshift/nodejs:18-ubi8
 
 LABEL maintainer="murray.shouesmith@example.com"
-LABEL description="Basic OpenShift-ready image"
+LABEL description="OpenShift-ready image"
 
-CMD ["echo", "Hello, OpenShift!"]
+CMD ["echo", "Hello, OpenShift with NodeJS!"]
