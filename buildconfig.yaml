@@ -6,19 +6,21 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com/username/repository.git
-      ref: main  # or the branch you want to deploy from
+      uri: git@gitlab.com:username/repository.git  # GitLab SSH URL
+      ref: main  # Branch to build from (adjust as needed)
+      secret:
+        name: gitlab-ssh-secret  # The secret containing the SSH private key
   strategy:
-    type: Docker
+    type: Docker  # Docker-based build strategy
     dockerStrategy:
-      dockerfile: Dockerfile  # Pointing to the Dockerfile in the root of the repository
+      dockerfile: Dockerfile  # Dockerfile name (adjust if different)
   output:
     to:
       kind: ImageStreamTag
-      name: my-app:latest
+      name: my-app:latest  # The image to push to
   triggers:
-    - type: GitHub
-      github:
-        secret: <random-string>  # Optional: Set a secret for GitHub webhook integration
+    - type: Git
+      git:
+        secret: <random-string>  # Optional: Set a secret for GitLab webhook integration
     - type: ConfigChange
     - type: ImageChange
