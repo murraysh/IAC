@@ -6,16 +6,18 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com/murraysh/IAC.git  # Your GitHub repository URL
-      ref: main  # Replace with your branch name if necessary
+      uri: git@github.com:murraysh/IAC.git  # GitHub repository URL
+      ref: master  # Branch to pull from
+      secret:
+        name: git-ssh-secret  # Reference the secret here for SSH authentication
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfile: Dockerfile  # Assuming the Dockerfile is in the root of your repo
+      dockerfile: Dockerfile  # Dockerfile in the root of the repository
   output:
     to:
       kind: ImageStreamTag
-      name: my-app:latest  # Valid ImageStreamTag name
+      name: my-app:latest  # Tag the resulting image
   triggers:
     - type: Git
     - type: ConfigChange
