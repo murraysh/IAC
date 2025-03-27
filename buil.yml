@@ -6,19 +6,29 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com:murraysh/IAC.git  # GitHub repository URL
-      ref: master  # Branch to pull from
-      secret:
-        name: git-ssh-secret  # Reference the secret here for SSH authentication
+      uri: git@github.com:murraysh/IAC.git  # Replace with your GitHub URL
+      ref: master
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfile: Dockerfile  # Dockerfile in the root of the repository
+      dockerfile: Dockerfile
   output:
     to:
       kind: ImageStreamTag
-      name: my-app:latest  # Tag the resulting image
+      name: my-app:latest
   triggers:
     - type: Git
     - type: ConfigChange
     - type: ImageChange
+  resources: {}
+  postCommit: {}
+  runPolicy: Serial
+  nodeSelector: {}
+  volumes:
+    - name: ssh-known-hosts
+      configMap:
+        name: known-hosts-configmap  # Replace with your actual ConfigMap name
+  volumeMounts:
+    - name: ssh-known-hosts
+      mountPath: /root/.ssh/known_hosts  # Mount the known_hosts at this location
+      subPath: known_hosts  # This makes sure it's the only file mounted here
