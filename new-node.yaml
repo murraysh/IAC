@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-node
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: new-node
+  template:
+    metadata:
+      labels:
+        app: new-node
+    spec:
+      containers:
+        - name: node-container
+          image: docker.io/library/node:18
+          ports:
+            - containerPort: 8080
