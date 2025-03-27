@@ -6,7 +6,7 @@ spec:
   source:
     type: Git
     git:
-      uri: git@github.com:murraysh/IAC.git  # GitHub repository URL
+      uri: https://github.com:murraysh/IAC.git  # GitHub repository URL
       ref: master  # Branch to pull from
       secret:
         name: git-ssh-secret  # Reference the secret here for SSH authentication
