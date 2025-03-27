@@ -1,0 +1,24 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: my-app-build
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/username/repository.git
+      ref: main  # or the branch you want to deploy from
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfile: Dockerfile  # Pointing to the Dockerfile in the root of the repository
+  output:
+    to:
+      kind: ImageStreamTag
+      name: my-app:latest
+  triggers:
+    - type: GitHub
+      github:
+        secret: <random-string>  # Optional: Set a secret for GitHub webhook integration
+    - type: ConfigChange
+    - type: ImageChange
