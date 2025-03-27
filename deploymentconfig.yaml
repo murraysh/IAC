@@ -1,0 +1,18 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: my-app
+spec:
+  replicas: 1  # We'll scale it later to 10 pods
+  selector:
+    app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app-container
+          image: my-app:latest  # This image is created by the BuildConfig
+          ports:
+            - containerPort: 8080  # Adjust this to the correct port if needed

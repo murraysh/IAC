@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: my-app-build
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/murraysh/IAC.git  # Your GitHub repository URL
+      ref: main  # Replace with your branch name if necessary
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfile: Dockerfile  # Assuming the Dockerfile is in the root of your repo
+  output:
+    to:
+      kind: ImageStreamTag
+      name: my-app:latest  # Valid ImageStreamTag name
+  triggers:
+    - type: Git
+    - type: ConfigChange
+    - type: ImageChange
