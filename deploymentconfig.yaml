@@ -3,7 +3,7 @@ kind: DeploymentConfig
 metadata:
   name: my-app
 spec:
-  replicas: 1  # We'll scale it later to 10 pods
+  replicas: 20  # Scale to 10 pods
   selector:
     app: my-app
   template:
@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: my-app:latest  # This image is created by the BuildConfig
+          image: my-app:latest  # This is the image built by OpenShift from the Git repository
           ports:
-            - containerPort: 8080  # Adjust this to the correct port if needed
+            - containerPort: 8080
