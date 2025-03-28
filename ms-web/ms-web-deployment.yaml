@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-web
+  labels:
+    app: ms-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-web
+  template:
+    metadata:
+      labels:
+        app: ms-web
+    spec:
+      containers:
+      - name: ms-web
+        image: nginx:latest
+        ports:
+        - containerPort: 80
